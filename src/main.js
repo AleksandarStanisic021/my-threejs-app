@@ -14,6 +14,12 @@ const sizes = {
   height: 600,
 };
 
+const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
+const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const box = new THREE.Mesh(boxGeometry, boxMaterial);
+scene.add(box);
+box.position.x = -1.1;
+
 const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
