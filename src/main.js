@@ -1,5 +1,7 @@
 import "./style.css";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
 const canvas = document.querySelector("#canvas");
 
 console.log("Hello Three.js!", canvas, THREE);
@@ -30,4 +32,13 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.render(scene, camera);
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+
+function animate() {
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+animate();
