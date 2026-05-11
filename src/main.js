@@ -38,9 +38,18 @@ controls.enableDamping = true;
 
 function resize() {
   window.addEventListener("resize", () => {
-    console.log("lala");
+    // Update sizes
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+    // Update camera aspect ratio
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
+    // Update renderer size
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   });
 }
+resize();
 
 function animate() {
   controls.update();
