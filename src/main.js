@@ -36,6 +36,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 
+function resize() {
+  window.addEventListener("resize", () => {
+    console.log("lala");
+  });
+}
+
 function animate() {
   controls.update();
   renderer.render(scene, camera);
