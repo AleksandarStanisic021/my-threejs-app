@@ -12,7 +12,6 @@ const sizes = {
   width: 800,
   height: 600,
 };
-let a = 2;
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const boxMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
