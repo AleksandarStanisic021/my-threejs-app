@@ -39,6 +39,7 @@ controls.enableDamping = true;
 function animate() {
   controls.update();
   renderer.render(scene, camera);
+  //test
   requestAnimationFrame(animate);
 }
 animate();
