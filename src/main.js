@@ -1,6 +1,15 @@
 import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import GUi from "lil-gui";
+
+const gui = new GUi();
+const parameters = {
+  color: 0xff0000,
+};
+gui.addColor(parameters, "color").onChange(() => {
+  material.color.set(parameters.color);
+});
 
 const canvas = document.querySelector("#canvas");
 const scene = new THREE.Scene();
