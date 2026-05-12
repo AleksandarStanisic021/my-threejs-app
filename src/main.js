@@ -27,6 +27,10 @@ const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
+gui.add(cube.position, "x").min(-3).max(3).step(0.01);
+gui.add(cube.position, "y").min(-3).max(3).step(0.01);
+gui.add(cube.position, "z").min(-3).max(3).step(0.01);
+
 const controls = new OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 5;
