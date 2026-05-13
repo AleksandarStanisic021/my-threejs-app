@@ -2,6 +2,16 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUi from "lil-gui";
+import imageSrc from ".//static/textures/door/color.jpg";
+console.log(imageSrc);
+
+const image = new Image();
+image.onload = () => {
+  const texture = new THREE.Texture(image);
+  texture.needsUpdate = true;
+  material.map = texture;
+};
+image.src = imageSrc;
 
 const gui = new GUi();
 const parameters = {
