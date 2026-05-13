@@ -30,6 +30,9 @@ scene.add(cube);
 gui.add(cube.position, "x").min(-3).max(3).step(0.01);
 gui.add(cube.position, "y").min(-3).max(3).step(0.01);
 gui.add(cube.position, "z").min(-3).max(3).step(0.01);
+gui.add(cube.scale, "x").min(0).max(5).step(0.01);
+gui.add(cube.scale, "y").min(0).max(5).step(0.01);
+gui.add(cube.scale, "z").min(0).max(5).step(0.01);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
