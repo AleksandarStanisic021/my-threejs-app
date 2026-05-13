@@ -44,11 +44,17 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
+let c = new THREE.Clock();
 
 function animate() {
-  requestAnimationFrame(animate);
-  cube1.rotation.y += 0.01;
+  let t = c.getElapsedTime();
+  console.log(t);
+
+  cube1.rotation.y = t;
+  cube2.rotation.z = t;
+  cube3.rotation.x = t;
   renderer.render(scene, camera);
+  requestAnimationFrame(animate);
 }
 
 animate();
