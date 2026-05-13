@@ -15,7 +15,7 @@ image.onload = () => {
 };
 
 const textureLoader = new THREE.TextureLoader();
-const texture2 = textureLoader.load(
+const colorTexture = textureLoader.load(
   imageSrc,
   () => {
     console.log("Texture loaded successfully");
@@ -27,6 +27,24 @@ const texture2 = textureLoader.load(
     console.warn("Texture loading in progress");
   },
 );
+const alphaTexture = textureLoader.load("/textures/door/alpha.jpg");
+const ambientOcclusionTexture = textureLoader.load(
+  "/textures/door/ambientOcclusion.jpg",
+  () => {
+    console.log("Ambient occlusion texture loaded successfully");
+  },
+  () => {
+    console.error("Error loading ambient occlusion texture");
+  },
+  () => {
+    console.warn("Ambient occlusion texture loading in progress");
+  },
+);
+const heightTexture = textureLoader.load("/textures/door/height.jpg");
+const normalTexture = textureLoader.load("/textures/door/normal.jpg");
+const metalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
+const roughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
+const matcapTexture = textureLoader.load("/textures/matcaps/8.png");
 
 const gui = new GUi();
 const parameters = {
@@ -49,7 +67,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const geometry = new THREE.BoxGeometry(1, 2, 3);
 const material = new THREE.MeshBasicMaterial({
-  map: texture2,
+  map: colorTexture,
+  alphaMap: alphaTexture,
   color: parameters.color,
 });
 
