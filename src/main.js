@@ -14,6 +14,20 @@ image.onload = () => {
   console.log(texture);
 };
 
+const textureLoader = new THREE.TextureLoader();
+const texture2 = textureLoader.load(
+  imageSrc,
+  () => {
+    console.log("Texture loaded successfully");
+  },
+  () => {
+    console.error("Error loading texture");
+  },
+  () => {
+    console.warn("Texture loading in progress");
+  },
+);
+
 const gui = new GUi();
 const parameters = {
   color: 0xff0000,
@@ -34,8 +48,11 @@ const renderer = new THREE.WebGLRenderer({ canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const geometry = new THREE.BoxGeometry(1, 2, 3);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-material.map = texture;
+const material = new THREE.MeshBasicMaterial({
+  map: texture2,
+  color: parameters.color,
+});
+
 const cube = new THREE.Mesh(geometry, material);
 
 scene.add(cube);
