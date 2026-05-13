@@ -1,96 +1,16 @@
-import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUi from "lil-gui";
-import imageSrc from "/textures/door/color.jpg";
-console.log(imageSrc);
-
-const image = new Image();
-image.src = imageSrc;
-const texture = new THREE.Texture(image);
-
-image.onload = () => {
-  texture.needsUpdate = true;
-  console.log(texture);
-};
-
-const textureLoader = new THREE.TextureLoader();
-const colorTexture = textureLoader.load(
-  imageSrc,
-  () => {
-    console.log("Texture loaded successfully");
-  },
-  () => {
-    console.error("Error loading texture");
-  },
-  () => {
-    console.warn("Texture loading in progress");
-  },
-);
-const alphaTexture = textureLoader.load("/textures/door/alpha.jpg");
-const ambientOcclusionTexture = textureLoader.load(
-  "/textures/door/ambientOcclusion.jpg",
-  () => {
-    console.log("Ambient occlusion texture loaded successfully");
-  },
-  () => {
-    console.error("Error loading ambient occlusion texture");
-  },
-  () => {
-    console.warn("Ambient occlusion texture loading in progress");
-  },
-);
-const heightTexture = textureLoader.load("/textures/door/height.jpg");
-const normalTexture = textureLoader.load("/textures/door/normal.jpg");
-const metalnessTexture = textureLoader.load("/textures/door/metalness.jpg");
-const roughnessTexture = textureLoader.load("/textures/door/roughness.jpg");
-const matcapTexture = textureLoader.load("/textures/matcaps/8.png");
-
-const gui = new GUi();
-const parameters = {
-  color: 0xff0000,
-};
-gui.addColor(parameters, "color").onChange(() => {
-  material.color.set(parameters.color);
-});
-
-const canvas = document.querySelector("#canvas");
 const scene = new THREE.Scene();
+
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000,
 );
-const renderer = new THREE.WebGLRenderer({ canvas });
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+
 renderer.setSize(window.innerWidth, window.innerHeight);
-
-const geometry = new THREE.BoxGeometry(1, 2, 3);
-const material = new THREE.MeshBasicMaterial({
-  map: colorTexture,
-  alphaMap: alphaTexture,
-  color: parameters.color,
-});
-
-const cube = new THREE.Mesh(geometry, material);
-
-scene.add(cube);
-
-gui.add(cube.position, "x").min(-3).max(3).step(0.01);
-gui.add(cube.position, "y").min(-3).max(3).step(0.01);
-gui.add(cube.position, "z").min(-3).max(3).step(0.01);
-gui.add(cube.scale, "x").min(0).max(5).step(0.01);
-gui.add(cube.scale, "y").min(0).max(5).step(0.01);
-gui.add(cube.scale, "z").min(0).max(5).step(0.01);
-
-const controls = new OrbitControls(camera, renderer.domElement);
-
-camera.position.z = 5;
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  renderer.render(scene, camera);
-}
-animate();
+document.body.appendChild(renderer.domElement);
+renderer.render(scene, camera);
