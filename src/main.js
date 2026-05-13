@@ -47,7 +47,6 @@ controls.update();
 
 function animate() {
   requestAnimationFrame(animate);
-
   cube1.rotation.y += 0.01;
   renderer.render(scene, camera);
 }
