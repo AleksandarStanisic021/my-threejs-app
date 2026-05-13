@@ -2,16 +2,17 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUi from "lil-gui";
-import imageSrc from ".//static/textures/door/color.jpg";
+import imageSrc from "/textures/door/color.jpg";
 console.log(imageSrc);
 
 const image = new Image();
-image.onload = () => {
-  const texture = new THREE.Texture(image);
-  texture.needsUpdate = true;
-  material.map = texture;
-};
 image.src = imageSrc;
+const texture = new THREE.Texture(image);
+
+image.onload = () => {
+  texture.needsUpdate = true;
+  console.log(texture);
+};
 
 const gui = new GUi();
 const parameters = {
@@ -34,7 +35,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 
 const geometry = new THREE.BoxGeometry(1, 2, 3);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+material.map = texture;
 const cube = new THREE.Mesh(geometry, material);
+
 scene.add(cube);
 
 gui.add(cube.position, "x").min(-3).max(3).step(0.01);
