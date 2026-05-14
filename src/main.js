@@ -21,7 +21,7 @@ const heightDoorColor = textureLoader.load("./textures/door/height.jpg");
 const normalDoorColor = textureLoader.load("./textures/door/normal.jpg");
 const metalnessDoorColor = textureLoader.load("./textures/door/metalness.jpg");
 const roughnessDoorColor = textureLoader.load("./textures/door/roughness.jpg");
-const matcapTexture = textureLoader.load("./textures/matcaps/8.png");
+const matcapTexture = textureLoader.load("./textures/matcaps/4.png");
 const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
 
 textureDoorColor.colorSpace = THREE.SRGBColorSpace;
@@ -39,6 +39,7 @@ const geometry1 = new THREE.BoxGeometry(1, 1, 1);
 const material1 = new THREE.MeshBasicMaterial({
   color: "blue",
 });
+const lambert = new THREE.MeshLambertMaterial();
 
 const geometry2 = new THREE.BoxGeometry(1, 1, 1);
 const material2 = new THREE.MeshBasicMaterial({
@@ -48,7 +49,7 @@ const cube3 = new THREE.Mesh(geometry2, material);
 scene.add(cube3);
 cube3.position.x = 1.5;
 
-const cube2 = new THREE.Mesh(geometry1, material);
+const cube2 = new THREE.Mesh(geometry1, lambert);
 scene.add(cube2);
 cube2.position.x = -1.5;
 
@@ -59,6 +60,12 @@ scene.add(camera);
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+const ambient = new THREE.AmbientLight(0xff0000, 1);
+scene.add(ambient);
+const point = new THREE.PointLight("green", 3);
+point.position.x = 3;
+scene.add(point);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
