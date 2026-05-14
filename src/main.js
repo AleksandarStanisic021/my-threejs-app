@@ -21,7 +21,7 @@ const heightDoorColor = textureLoader.load("./textures/door/height.jpg");
 const normalDoorColor = textureLoader.load("./textures/door/normal.jpg");
 const metalnessDoorColor = textureLoader.load("./textures/door/metalness.jpg");
 const roughnessDoorColor = textureLoader.load("./textures/door/roughness.jpg");
-const matcapTexture = textureLoader.load("./textures/matcaps/1.png");
+const matcapTexture = textureLoader.load("./textures/matcaps/8.png");
 const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
 
 textureDoorColor.colorSpace = THREE.SRGBColorSpace;
@@ -31,6 +31,9 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({
   map: textureDoorColor,
 });
+
+const matcap = new THREE.MeshMatcapMaterial();
+matcap.matcap = matcapTexture;
 
 const geometry1 = new THREE.BoxGeometry(1, 1, 1);
 const material1 = new THREE.MeshBasicMaterial({
@@ -49,7 +52,7 @@ const cube2 = new THREE.Mesh(geometry1, material);
 scene.add(cube2);
 cube2.position.x = -1.5;
 
-const cube1 = new THREE.Mesh(geometry, material);
+const cube1 = new THREE.Mesh(geometry, matcap);
 camera.position.z = 3;
 scene.add(cube1);
 scene.add(camera);
