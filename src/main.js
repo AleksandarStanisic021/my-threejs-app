@@ -40,12 +40,27 @@ const material1 = new THREE.MeshBasicMaterial({
   color: "blue",
 });
 const lambert = new THREE.MeshLambertMaterial();
+const phong = new THREE.MeshPhongMaterial();
+phong.shininess = 100;
+phong.specular = new THREE.Color("red");
+
+const standard = new THREE.MeshStandardMaterial();
+standard.metalness = 0.2;
+standard.roughness = 0.7;
+standard.map = textureDoorColor;
+standard.aoMap = AODoorColor;
+standard.aoMapIntensity = 3;
+standard.normalMap = normalDoorColor;
+standard.metalnessMap = metalnessDoorColor;
+standard.roughnessMap = roughnessDoorColor;
+standard.displacementMap = heightDoorColor;
+standard.displacementScale = 0.1;
 
 const geometry2 = new THREE.BoxGeometry(1, 1, 1);
 const material2 = new THREE.MeshBasicMaterial({
   color: "green",
 });
-const cube3 = new THREE.Mesh(geometry2, material);
+const cube3 = new THREE.Mesh(geometry2, standard);
 scene.add(cube3);
 cube3.position.x = 1.5;
 
@@ -53,7 +68,7 @@ const cube2 = new THREE.Mesh(geometry1, lambert);
 scene.add(cube2);
 cube2.position.x = -1.5;
 
-const cube1 = new THREE.Mesh(geometry, matcap);
+const cube1 = new THREE.Mesh(geometry, standard);
 camera.position.z = 3;
 scene.add(cube1);
 scene.add(camera);
@@ -61,10 +76,12 @@ scene.add(camera);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const ambient = new THREE.AmbientLight(0xff0000, 1);
+const ambient = new THREE.AmbientLight(0x000011, 14);
 scene.add(ambient);
-const point = new THREE.PointLight("green", 3);
+const point = new THREE.PointLight("yellow", 30);
 point.position.x = 3;
+point.position.y = 4;
+point.position.z = 5;
 scene.add(point);
 
 const controls = new OrbitControls(camera, renderer.domElement);
