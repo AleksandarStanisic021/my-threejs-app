@@ -12,9 +12,24 @@ const camera = new THREE.PerspectiveCamera(
 );
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 
+const textureLoader = new THREE.TextureLoader();
+
+const textureDoorColor = textureLoader.load("./textures/door/color.jpg");
+const alphaDoorColor = textureLoader.load("./textures/door/alpha.jpg");
+const AODoorColor = textureLoader.load("./textures/door/ambientOcclusion.jpg");
+const heightDoorColor = textureLoader.load("./textures/door/height.jpg");
+const normalDoorColor = textureLoader.load("./textures/door/normal.jpg");
+const metalnessDoorColor = textureLoader.load("./textures/door/metalness.jpg");
+const roughnessDoorColor = textureLoader.load("./textures/door/roughness.jpg");
+const matcapTexture = textureLoader.load("./textures/matcaps/1.png");
+const gradientTexture = textureLoader.load("./textures/gradients/3.jpg");
+
+textureDoorColor.colorSpace = THREE.SRGBColorSpace;
+matcapTexture.colorSpace = THREE.SRGBColorSpace;
+
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({
-  color: "red",
+  map: textureDoorColor,
 });
 
 const geometry1 = new THREE.BoxGeometry(1, 1, 1);
@@ -26,11 +41,11 @@ const geometry2 = new THREE.BoxGeometry(1, 1, 1);
 const material2 = new THREE.MeshBasicMaterial({
   color: "green",
 });
-const cube3 = new THREE.Mesh(geometry2, material2);
+const cube3 = new THREE.Mesh(geometry2, material);
 scene.add(cube3);
 cube3.position.x = 1.5;
 
-const cube2 = new THREE.Mesh(geometry1, material1);
+const cube2 = new THREE.Mesh(geometry1, material);
 scene.add(cube2);
 cube2.position.x = -1.5;
 
@@ -48,7 +63,6 @@ let c = new THREE.Clock();
 
 function animate() {
   let t = c.getElapsedTime();
-  console.log(t);
 
   cube1.rotation.y = t;
   cube2.rotation.z = t;
