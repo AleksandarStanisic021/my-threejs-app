@@ -23,8 +23,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
 controls.update();
-
 
 function animate() {
   renderer.render(scene, camera);
