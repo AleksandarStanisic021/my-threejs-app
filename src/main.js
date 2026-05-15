@@ -2,7 +2,6 @@ import "./style.css";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-console.log(THREE);
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x444444);
 
@@ -26,7 +25,7 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
 
-console.log(`yoyo`);
+
 function animate() {
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
