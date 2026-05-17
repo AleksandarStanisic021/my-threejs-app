@@ -39,11 +39,11 @@ scene.add(dirLight);
 const fontLoader = new FontLoader();
 
 // Pošto je fajl u public folderu, Vite ga vidi na korenskoj ruti "/"
-fontLoader.load("fonts/helvetiker_regular.typeface.json", (font) => {
-  const textGeometry = new TextGeometry("VITE COOl", {
+fontLoader.load("fonts/font.json", (font) => {
+  const textGeometry = new TextGeometry("Ciandre", {
     font: font,
     size: 1.5,
-    height: 0.4,
+    depth: 0.2,
     curveSegments: 12,
     bevelEnabled: true,
     bevelThickness: 0.03,
